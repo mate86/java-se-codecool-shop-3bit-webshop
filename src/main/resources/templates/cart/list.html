@@ -59,13 +59,13 @@
         <div th:each="product,iterStat : ${cart.getProducts()}">
             <div class="td-5 c newline" th:text="${product.product.name}"></div>
             <div class="td-5 c">
-                <form class="inline" th:action="${'/cart/modify/'+product.product.id}" method="post">
+                <form class="inline" th:action="${'/templates.cart/modify/'+product.product.id}" method="post">
                     <input type="text" class="form-control small inline" name="quantity" th:value="${product.quantity}" />
                     <button class="btn btn-info" type="submit">
                         <span class="glyphicon glyphicon-refresh"></span>
                     </button>
                 </form>
-                <form class="inline" th:action="${'/cart/remove/'+product.product.id}" method="post">
+                <form class="inline" th:action="${'/templates.cart/remove/'+product.product.id}" method="post">
                     <button class="btn btn-danger" type="submit">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>

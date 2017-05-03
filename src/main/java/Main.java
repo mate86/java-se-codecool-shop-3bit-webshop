@@ -41,7 +41,7 @@ public class Main {
         //mano test
         get("/cart", CartController::renderProducts, new ThymeleafTemplateEngine());
         get("/cart/add/:id", CartController::addProduct, new ThymeleafTemplateEngine());
-        post("cart/modify/:id", CartController::modifyProduct, new ThymeleafTemplateEngine());
+        post("/cart/modify/:id", CartController::modifyProduct, new ThymeleafTemplateEngine());
         post("/cart/remove/:id", CartController::removeProduct, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
