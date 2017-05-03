@@ -1,0 +1,27 @@
+.td-5 {
+    float: left;
+    width:20%;
+    margin-top:10px;
+}
+
+.newline {
+    clear:both;
+}
+
+.title {
+    font-weight:bold;
+    font-size:20px;
+    margin-top:0px;
+}
+
+.c {
+    text-align: center;
+}
+
+.small {
+    width:50px !important;
+}
+
+.inline {
+    display:inline !important;
+}
