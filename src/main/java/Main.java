@@ -1,6 +1,7 @@
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
+import com.codecool.shop.controller.CartController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
@@ -12,6 +13,11 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 public class Main {
 
     public static void main(String[] args) {
+
+        //Manó tests
+        Cart cart = new Cart();
+
+
 
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
@@ -26,10 +32,17 @@ public class Main {
 
         // Always add generic routes to the end
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
            return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
         });
+
+        //mano test
+        get("/cart", CartController::renderProducts, new ThymeleafTemplateEngine());
+        get("/cart/add/:id", CartController::addProduct, new ThymeleafTemplateEngine());
+        post("cart/modify/:id", CartController::modifyProduct, new ThymeleafTemplateEngine());
+        post("/cart/remove/:id", CartController::removeProduct, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
