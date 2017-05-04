@@ -15,11 +15,11 @@ public class LineItem {
     }
 
     public float getYield() {
-        return Math.round((price * quantity) * 100) / 100;
+        return Math.round(price * quantity * 100.0) / 100f;
     }
 
     public float getVatPrice() {
-        return Math.round((price * quantity) * 127) / 100;
+        return Math.round((price * quantity) * 127) / 100f;
     }
 
     public String toString() {
