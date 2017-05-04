@@ -30,13 +30,15 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+        <h1>Codecool Shop</h1>
 </div>
 
 <div class="container">
-    <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+    <form action="/" method="get">
+        <select name="id" class="well well-sm">
+            <option th:each="category,iterStat:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </form>
 
     <div id="products" class="row list-group">
 
@@ -51,7 +53,7 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to templates.cart</a>
+                            <a class="btn btn-success" th:attr="href='/cart/add/'+${prod.id}">Add to templates.cart</a>
                         </div>
                     </div>
                 </div>

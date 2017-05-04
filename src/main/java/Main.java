@@ -32,6 +32,7 @@ public class Main {
 
         // Always add generic routes to the end
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/:id", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
@@ -49,27 +50,28 @@ public class Main {
     }
 
     public static void populateData() {
-
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        //setting up a new suppliers
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-
-        //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
+        Supplier nokia = new Supplier("Nokia", "Connecting people");
+        supplierDataStore.add(amazon);
         supplierDataStore.add(lenovo);
+        supplierDataStore.add(nokia);
 
-        //setting up a new product category
+        //setting up a new product categories
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        ProductCategory phone = new ProductCategory("Phone", "Hardware", "A phone.");
         productCategoryDataStore.add(tablet);
+        productCategoryDataStore.add(phone);
 
         //setting up products and printing it
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("Nokia 3410", 50, "USD", "Nokia's legend.", phone, nokia));
 
     }
-
-
 }
