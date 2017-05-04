@@ -1,0 +1,48 @@
+.td-2 {
+    float: left;
+    width:50%;
+    margin-top:10px;
+}
+
+.td-20 {
+    float: left;
+    width:20%;
+    margin-top:10px;
+}
+
+.td-80 {
+    float: left;
+    width:80%;
+    margin-top:10px;
+}
+
+.td-5 {
+    float: left;
+    width:20%;
+    margin-top:10px;
+}
+
+.newline {
+    clear:both;
+}
+
+.title {
+    font-weight:bold;
+    font-size:20px;
+}
+
+.c {
+    text-align: center;
+}
+
+.r {
+    text-align: right;
+}
+
+.small {
+    width:50px !important;
+}
+
+.inline {
+    display:inline !important;
+}

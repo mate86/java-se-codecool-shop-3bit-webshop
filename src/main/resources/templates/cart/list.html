@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/manuTable.css"/>
+</head>
+
+<body>
+<div class="jumbotron text-center">
+    <h1>
+        <a th:href='${"/?id="+cart.getProduct(cart.getProducts().size-1).product.productCategory.id}' style="position:inline-block;text-decoration:none">
+            <svg width="5%" height="5%" viewBox="0 0 512 512">
+                <path fill="#010101" d="M128,256L256,0h128L256,256l128,256H256L128,256z"/>
+            </svg>
+        </a>
+        Codecool Shop
+        <a href="/checkout" style="position:inline-block">
+            <svg width="5%" height="5%" viewBox="0 0 512 512">
+                <path fill="#010101" d="M384,256L256,0L128,0L256,256L128,512H256L384,256z"/>
+            </svg>
+        </a>
+    </h1>
+</div>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="well well-sm">
+            <strong>Basket</strong>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div>
+            <div class="td-5 title c">Name</div>
+            <div class="td-5 title c">Quantity</div>
+            <div class="td-5 title c">Unit price</div>
+            <div class="td-5 title c">Net total</div>
+            <div class="td-5 title c">Total (with VAT)</div>
+        </div>
+
+        <div th:each="product,iterStat : ${cart.getProducts()}">
+            <div class="td-5 c newline" th:text="${product.product.name}"></div>
+            <div class="td-5 c">
+                <form class="inline" th:action="${'/cart/modify/'+product.product.id}" method="post">
+                    <input type="text" class="form-control small inline" name="quantity" th:value="${product.quantity}" />
+                    <button class="btn btn-info" type="submit">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                </form>
+                <form class="inline" th:action="${'/cart/remove/'+product.product.id}" method="post">
+                    <button class="btn btn-danger" type="submit">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </div>
+            <div class="td-5 c" th:text="${product.price}"></div>
+            <div class="td-5 c" th:text="${product.getYield()}"></div>
+            <div class="td-5 c" th:text="${product.getVatPrice()}"></div>
+        </div>
+
+        <div>
+            <div class="td-5 newline"></div>
+            <div class="td-5"></div>
+            <div class="td-5"></div>
+            <div class="td-5 c title">All:</div>
+            <div class="td-5 c title" th:text="${cart.countTotal()}"></div>
+        </div>
+
+        <div>
+            <div class="td-80 newline"></div>
+            <div class="td-20 c" th:switch="${cart.isEmpty()}">
+                <a href="/order/checkout" class="btn btn-success" th:case="${false}">Checkout</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<br /><br />
+
+
+<div class="c" th:replace="footer :: copy"></div>
+
+</body>
+</html>

@@ -21,11 +21,24 @@ public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.find(1));
-        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("suppliers", supplierDataStore.getAll());
+        if(req.queryParams("category")!=null) {
+            params.put("filter", productCategoryDataStore.find(Integer.parseInt(req.queryParams("category"))));
+            params.put("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(req.queryParams("category")))));
+        }
+        else if(req.queryParams("supplier")!=null) {
+            params.put("filter", supplierDataStore.find(Integer.parseInt(req.queryParams("supplier"))));
+            params.put("products", productDataStore.getBy(supplierDataStore.find(Integer.parseInt(req.queryParams("supplier")))));
+        }
+        else{
+            params.put("filter", productCategoryDataStore.find(1));
+            params.put("products", productDataStore.getAll());
+        }
         return new ModelAndView(params, "product/index");
     }
 
