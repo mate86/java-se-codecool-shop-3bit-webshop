@@ -94,6 +94,13 @@
             <div class="td-5 c title">All:</div>
             <div class="td-5 c title" th:text="${cart.countTotal()}"></div>
         </div>
+
+        <div>
+            <div class="td-80 newline"></div>
+            <div class="td-20 c" th:switch="${cart.isEmpty()}">
+                <a href="/order/checkout" class="btn btn-success" th:case="${false}">Checkout</a>
+            </div>
+        </div>
     </div>
     <div class="col-md-1"></div>
 </div>

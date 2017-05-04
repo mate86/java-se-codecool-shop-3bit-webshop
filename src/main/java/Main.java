@@ -13,11 +13,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Manó tests
-        Cart cart = new Cart();
-
-
-
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
@@ -43,6 +38,10 @@ public class Main {
         get("/cart/add/:id", CartController::addProduct, new ThymeleafTemplateEngine());
         post("/cart/modify/:id", CartController::modifyProduct, new ThymeleafTemplateEngine());
         post("/cart/remove/:id", CartController::removeProduct, new ThymeleafTemplateEngine());
+
+        //CHECKOUT ROUTES
+        get("/order/checkout", OrderController::checkout, new ThymeleafTemplateEngine());
+        post("/order/confirmation", OrderController::confirmation, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();

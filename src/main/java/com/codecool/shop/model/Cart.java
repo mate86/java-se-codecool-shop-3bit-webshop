@@ -66,14 +66,19 @@ public class Cart implements Sessionable {
             String[] sessionValues = request.session().attribute("order").toString().split(";");
 
             Date orderDate = new Date();
-            orderDate.setTime(Long.parseLong(sessionValues[3]));
+            orderDate.setTime(Long.parseLong(sessionValues[8]));
 
             order = new Order(
                     Integer.parseInt(sessionValues[0]),
                     Integer.parseInt(sessionValues[1]),
                     sessionValues[2],
+                    sessionValues[3],
+                    sessionValues[4],
+                    sessionValues[5],
+                    sessionValues[6],
+                    sessionValues[7],
                     orderDate,
-                    sessionValues[4]
+                    Integer.parseInt(sessionValues[9])
             );
 
         }
@@ -139,5 +144,12 @@ public class Cart implements Sessionable {
             total += lineItem.get(i).getVatPrice();
         }
         return total;
+    }
+
+    public boolean isEmpty() {
+        if (lineItem.size() == 0) {
+            return true;
+        }
+        return false;
     }
 }

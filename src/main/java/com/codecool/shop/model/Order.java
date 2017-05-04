@@ -6,31 +6,83 @@ import java.util.Date;
  * Created by flowerpower on 2017. 05. 02..
  */
 public class Order {
-    public int id;
-    public int userId;
-    public String description;
-    public Date date;
-    public String status;
+    private int id;
+    private int userId;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String billingAddress;
+    private String shippingAddress;
+    private String description;
+    private Date date;
+    private int status;
 
     public Order(int userId, String description) {
-        this.id = 1;
-        this.userId = userId;
-        this.description = description;
-        this.date = new Date();
-        this.status = "IN PROGRESS";
+        this(0, userId, null, null, null, null, null, description, new Date(),0);
     }
 
-    public Order(int id, int userId, String description, Date date, String status) {
+    public Order(int id, int userId, String name, String email, String phoneNumber, String billingAddress, String shippingAddress, String description, Date date, int status) {
         this.id = id;
         this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.billingAddress = billingAddress;
+        this.shippingAddress = shippingAddress;
         this.description = description;
         this.date = date;
+        this.status = status;
+    }
+
+    public void setByUser(String name, String email, String phoneNumber, String billingAddress, String shippingAddress, String description) {
+        setName(name);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+        setBillingAddress(billingAddress);
+        setShippingAddress(shippingAddress);
+        setDescription(description);
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStatus(int status) {
         this.status = status;
     }
 
     public String toString() {
         return id + ";"+
                userId + ";" +
+               name + ";" +
+               email + ";" +
+               phoneNumber + ";" +
+               billingAddress + ";" +
+               shippingAddress + ";" +
                description + ";" +
                date.getTime() + ";" +
                status;
