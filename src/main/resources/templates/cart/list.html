@@ -31,7 +31,7 @@
 <body>
 <div class="jumbotron text-center">
     <h1>
-        <a href="/" style="position:inline-block;text-decoration:none">
+        <a th:href='${"/?id="+cart.getProduct(cart.getProducts().size-1).product.productCategory.id}' style="position:inline-block;text-decoration:none">
             <svg width="5%" height="5%" viewBox="0 0 512 512">
                 <path fill="#010101" d="M128,256L256,0h128L256,256l128,256H256L128,256z"/>
             </svg>

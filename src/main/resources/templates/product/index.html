@@ -35,8 +35,8 @@
 
 <div class="container">
     <form action="/" method="get">
-        <select name="id" class="well well-sm">
-            <option th:each="category,iterStat:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        <select name="id" class="well well-sm" onchange="this.form.submit()">
+            <option th:each="category,iterStat:${categories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id==filter.id}?selected"></option>
         </select>
     </form>
 
