@@ -29,9 +29,20 @@
 </head>
 
 <body>
-
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>
+        <a th:href='${"/?id="+cart.getProduct(cart.getProducts().size-1).product.productCategory.id}' style="position:inline-block;text-decoration:none">
+            <svg width="5%" height="5%" viewBox="0 0 512 512">
+                <path fill="#010101" d="M128,256L256,0h128L256,256l128,256H256L128,256z"/>
+            </svg>
+        </a>
+        Codecool Shop
+        <a href="/checkout" style="position:inline-block">
+            <svg width="5%" height="5%" viewBox="0 0 512 512">
+                <path fill="#010101" d="M384,256L256,0L128,0L256,256L128,512H256L384,256z"/>
+            </svg>
+        </a>
+    </h1>
 </div>
 
 
