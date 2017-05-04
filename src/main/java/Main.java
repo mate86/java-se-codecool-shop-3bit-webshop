@@ -26,7 +26,7 @@ public class Main {
 
         // Always add generic routes to the end
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/:id", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/:category", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         // Equivalent with above
         get("/index", (Request req, Response res) -> {

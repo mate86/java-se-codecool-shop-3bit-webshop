@@ -35,8 +35,13 @@
 
 <div class="container">
     <form action="/" method="get">
-        <select name="id" class="well well-sm" onchange="this.form.submit()">
+        <select name="category" class="well well-sm" onchange="this.form.submit()">
             <option th:each="category,iterStat:${categories}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id==filter.id}?selected"></option>
+        </select>
+    </form>
+    <form action="/" method="get">
+        <select name="supplier" class="well well-sm" onchange="this.form.submit()">
+            <option th:each="supplier,iterStat:${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}" th:selected="${supplier.id==filter.id}?selected"></option>
         </select>
     </form>
 
