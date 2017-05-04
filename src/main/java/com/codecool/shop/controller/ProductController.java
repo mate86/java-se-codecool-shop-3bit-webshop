@@ -37,7 +37,7 @@ public class ProductController {
         }
         else{
             params.put("filter", productCategoryDataStore.find(1));
-            params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+            params.put("products", productDataStore.getAll());
         }
         return new ModelAndView(params, "product/index");
     }

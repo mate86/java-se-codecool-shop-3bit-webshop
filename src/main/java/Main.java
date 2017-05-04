@@ -53,16 +53,24 @@ public class Main {
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         Supplier nokia = new Supplier("Nokia", "Connecting people");
+        Supplier westernelectric = new Supplier("Western Electric", "Century of progress");
+        Supplier tinkertom = new Supplier("Tinker Tom", "The inventor");
+        Supplier funfactory = new Supplier("Fun factory", "All you really need");
         supplierDataStore.add(amazon);
         supplierDataStore.add(lenovo);
         supplierDataStore.add(nokia);
+        supplierDataStore.add(westernelectric);
+        supplierDataStore.add(tinkertom);
+        supplierDataStore.add(funfactory);
 
         //setting up a new product categories
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory phone = new ProductCategory("Phone", "Hardware", "A phone.");
+        ProductCategory gift = new ProductCategory("Gifts", "Accessories", "Fun stuff.");
         productCategoryDataStore.add(tablet);
         productCategoryDataStore.add(phone);
+        productCategoryDataStore.add(gift);
 
         //setting up products and printing it
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -70,6 +78,10 @@ public class Main {
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Nokia 3410", 50, "USD", "Nokia's legend.", phone, nokia));
+        productDataStore.add(new Product("Model 500", 20, "USD", "Phone of the century.", phone, westernelectric));
+        productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
+        productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
+        productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
 
     }
 }
