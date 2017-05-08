@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Investify" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3bit Store</title>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/css/manuTable.css" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div th:replace="navbar :: copy"></div>
+
+<div class="jumbotron text-center">
+    <h1>Jelenlegi gyűjtésünk állása</h1>
+    <div class="progress mprogress">
+        <div class="progress-bar progress-bar-striped active" aria-valuenow="43"
+             aria-valuemin="0" aria-valuemax="100" style="width:40%">
+        </div>
+    </div>
+    <p>
+        <br />
+        <b>4 300 000 HUF</b> / 10 000 000 HUF<br /><br />
+
+        <b>Minimum befektethető:</b> 100 000 HUF<br/>
+        <b>Garantált ingatlan megtérülési idő:</b> 12-15 év<br /><br/>
+
+        <a class="btn btn-info" href="/faq">Rendszerünk működése</a>
+        <a class="btn btn-success" href="/registration">Befektetek</a>
+    </p>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10 text-center">
+            <h2>Nem akarsz várni? Fektess ingatlanba azonnal!</h2>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">13. kerület, Reitter Ferenc utca</div>
+                <div class="panel-body c">
+
+                    <img src="http://ingatlancdn.com/photos/08/44/22839156_110816158_l.jpg" class="img-thumbnail" alt="13. kerületi befektetésünk" width="304" height="236" />
+                    <br/>
+
+                    <div class="td-2 b">Méret</div>
+                    <div class="td-2">19 nm</div>
+
+                    <div class="td-2 b newline nomargin">Bruttó megtérülés</div>
+                    <div class="td-2 nomargin">13 év</div>
+
+                    <div class="td-2 b newline nomargin">Részesedés</div>
+                    <div class="td-2 nomargin">1%</div>
+
+                    <div class="td-2 b newline nomargin"> Ár</div>
+                    <div class="td-2 nomargin">120 000 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Havi hozam</div>
+                    <div class="td-2 nomargin">520 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Bérlő</div>
+                    <div class="td-2 nomargin">99%</div>
+
+                    <div class="td-1 c newline">
+                        <button class="btn btn-success">Megveszem!</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">13. kerület, Angyalföld</div>
+                <div class="panel-body c">
+
+                    <img src="http://ingatlancdn.com/photos/2f/17/23062668_110979701_l.jpg" class="img-thumbnail" alt="13. kerületi befektetésünk" width="304" height="236" />
+                    <br/>
+
+                    <div class="td-2 b">Méret</div>
+                    <div class="td-2">17 nm</div>
+
+                    <div class="td-2 b newline nomargin">Bruttó megtérülés</div>
+                    <div class="td-2 nomargin">14 év</div>
+
+                    <div class="td-2 b newline nomargin">Részesedés</div>
+                    <div class="td-2 nomargin">1%</div>
+
+                    <div class="td-2 b newline nomargin"> Ár</div>
+                    <div class="td-2 nomargin">120 000 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Havi hozam</div>
+                    <div class="td-2 nomargin">500 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Bérlő</div>
+                    <div class="td-2 nomargin">100%</div>
+
+                    <div class="td-1 c newline">
+                        <button class="btn btn-success">Megveszem!</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">14. kerület, Szugló utca 64</div>
+                <div class="panel-body c">
+
+                    <img src="http://ingatlancdn.com/photos/be/f2/22979252_110161242_l.jpg" class="img-thumbnail" alt="13. kerületi befektetésünk" width="304" height="236" />
+                    <br/>
+
+                    <div class="td-2 b">Méret</div>
+                    <div class="td-2">35 nm</div>
+
+                    <div class="td-2 b newline nomargin">Bruttó megtérülés</div>
+                    <div class="td-2 nomargin">12 év</div>
+
+                    <div class="td-2 b newline nomargin">Részesedés</div>
+                    <div class="td-2 nomargin">1%</div>
+
+                    <div class="td-2 b newline nomargin"> Ár</div>
+                    <div class="td-2 nomargin">120 000 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Havi hozam</div>
+                    <div class="td-2 nomargin">520 HUF</div>
+
+                    <div class="td-2 b newline nomargin">Bérlő</div>
+                    <div class="td-2 nomargin">100%</div>
+
+                    <div class="td-1 c newline">
+                        <button class="btn btn-success">Megveszem!</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

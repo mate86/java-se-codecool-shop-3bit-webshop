@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav class="navbar navbar-default" th:fragment="copy">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Investify</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+        <li th:if="${page.name()} == 'FAQ'"><a href="/">Főoldal</a></li>
+        <li th:if="${page.name()} == 'FAQ'" class="active"><a href="/faq">Rendszerünk működése</a></li>
+
+        <li th:if="${page.name()} == 'INDEX'" class="active"><a href="/">Főoldal</a></li>
+        <li th:if="${page.name()} == 'INDEX'"><a href="/faq">Rendszerünk működése</a></li>
+
+        <li th:if="${page.name()} == 'LOGIN'"><a href="/">Főoldal</a></li>
+        <li th:if="${page.name()} == 'LOGIN'"><a href="/faq">Rendszerünk működése</a></li>
+    </ul>
+
+    <div class="mnavbar-right" style="float:right;">
+        <a href="/registration" class="btn btn-info">Regisztráció</a>
+        <a href="/login" class="btn btn-success">Belépés</a>
+    </div>
+</nav>
+
+</body>
+</html>
