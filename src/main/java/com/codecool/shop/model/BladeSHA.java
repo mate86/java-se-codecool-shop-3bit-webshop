@@ -1,4 +1,4 @@
-package com.codecool.shop.tools;
+package com.codecool.shop.model;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
