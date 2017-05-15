@@ -48,7 +48,8 @@ public class Main {
 
     public static void populateData() {
         //setting up a new suppliers
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoDatabase.getInstance();
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         Supplier nokia = new Supplier("Nokia", "Connecting people");
