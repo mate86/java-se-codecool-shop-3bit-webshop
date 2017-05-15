@@ -1,29 +1,31 @@
--- DROP TABLE IF EXISTS Products;
--- DROP TABLE IF EXISTS ProductCategories;
--- DROP TABLE IF EXISTS Suppliers;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS ProductCategories;
+DROP TABLE IF EXISTS Suppliers;
 
-CREATE TABLE ProductCategories
+CREATE TABLE IF NOT EXISTS ProductCategories
 (
-  id VARCHAR(8) PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(40),
   description VARCHAR(150),
   department VARCHAR(40)
 );
 
-CREATE TABLE Suppliers
+CREATE TABLE IF NOT EXISTS Suppliers
 (
-  id VARCHAR(8) PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(40),
   description VARCHAR(150)
 );
 
-CREATE TABLE Products
+CREATE TABLE IF NOT EXISTS Products
 (
-  id VARCHAR(8) PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(40),
   description VARCHAR(150),
   defaultPrice FLOAT,
   defaultCurrency VARCHAR(40),
-  productCategory VARCHAR(8) REFERENCES ProductCategories (id),
-  supplier VARCHAR(8) REFERENCES Suppliers(id)
+  productCategory INTEGER,
+  supplier INTEGER,
+  FOREIGN KEY (productCategory) REFERENCES ProductCategories (id),
+  FOREIGN KEY (supplier) REFERENCES Suppliers(id)
 );
