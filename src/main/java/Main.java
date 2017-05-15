@@ -64,7 +64,8 @@ public class Main {
         supplierDataStore.add(funfactory);
 
         //setting up a new product categories
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDatabase.getInstance();
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory phone = new ProductCategory("Phone", "Hardware", "A phone.");
         ProductCategory gift = new ProductCategory("Gifts", "Accessories", "Fun stuff.");

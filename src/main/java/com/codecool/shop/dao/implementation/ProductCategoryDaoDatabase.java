@@ -1,16 +1,20 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Supplier;
 
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.model.ProductCategory;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
 
-public class SupplierDaoDatabase implements SupplierDao {
+public class ProductCategoryDaoDatabase implements ProductCategoryDao {
 
-    private List<Supplier> DATA = new ArrayList<>();
-    private static SupplierDaoDatabase instance = null;
+    private List<ProductCategory> DATA = new ArrayList<>();
+    private static ProductCategoryDaoDatabase instance = null;
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
     private static final String DB_USER = "postgres";
@@ -18,25 +22,25 @@ public class SupplierDaoDatabase implements SupplierDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private SupplierDaoDatabase() {
+    private ProductCategoryDaoDatabase() {
     }
 
-    public static SupplierDaoDatabase getInstance() {
+    public static ProductCategoryDaoDatabase getInstance() {
         if (instance == null) {
-            instance = new SupplierDaoDatabase();
+            instance = new ProductCategoryDaoDatabase();
         }
         return instance;
     }
 
     @Override
-    public void add(Supplier supplier) {
-        String query = "INSERT INTO suppliers (name, description) " +
-                "VALUES ('" + supplier.getName() + "', '" + supplier.getDescription() + "');";
+    public void add(ProductCategory category) {
+        String query = "INSERT INTO productcategories (name, department, description) " +
+                "VALUES ('" + category.getName() + "', '" + category.getDepartment() + "', '" + category.getDescription() + "');";
         executeQuery(query);
     }
 
     @Override
-    public Supplier find(int id) {
+    public ProductCategory find(int id) {
         return DATA.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -46,7 +50,7 @@ public class SupplierDaoDatabase implements SupplierDao {
     }
 
     @Override
-    public List<Supplier> getAll() {
+    public List<ProductCategory> getAll() {
         return DATA;
     }
 
