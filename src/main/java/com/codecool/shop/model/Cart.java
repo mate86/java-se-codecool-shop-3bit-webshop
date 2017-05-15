@@ -22,7 +22,7 @@ public class Cart implements Sessionable {
 
     public void addToCart(Product product, int quantity) {
         if (isProductInCart(product)) {
-            modifyItem(product, quantity);
+            lineItem.get(productIndexInCart(product)).quantity += quantity;
         } else {
             lineItem.add(new LineItem(product, quantity, product.getDefaultPrice()));
         }
@@ -40,13 +40,22 @@ public class Cart implements Sessionable {
         }
     }
 
+    public LineItem getProduct(int index) {
+        return lineItem.get(index);
+    }
+
     public ArrayList<LineItem> getProducts() {
         return lineItem;
     }
 
-    public LineItem getProduct(int index) {
-       return lineItem.get(index);
+    public Integer getCartSize() {
+        int cartsize=0;
+        for(int item=0;item<lineItem.size();item++){
+            cartsize+=lineItem.get(item).quantity;
+        }
+        return cartsize;
     }
+
 
     public void initFromSession(Request request) {
         initOrderFromSession(request);
