@@ -19,9 +19,10 @@ import java.util.Map;
 public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoDatabase.getInstance();
         SupplierDao supplierDataStore = SupplierDaoDatabase.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDatabase.getInstance();
         Cart cart=new Cart();
