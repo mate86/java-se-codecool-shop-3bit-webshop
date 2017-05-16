@@ -41,13 +41,7 @@ public class ProductDaoDatabase implements ProductDao {
         String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
 
-//        String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
-//                "VALUES ('" + product.getName() + "', " + product.getDefaultPrice() + ", '" + product.getDefaultCurrency().toString() + "', ?, " + categoryID + ", " +
-//                supplierID + ");";
-
-
         try (Connection connection = getConnection();
-//             Statement statement = connection.createStatement();
              PreparedStatement statement = connection.prepareStatement(query);
         ) {
             statement.setString(1, product.getName());
@@ -56,13 +50,11 @@ public class ProductDaoDatabase implements ProductDao {
             statement.setString(4, product.getDescription());
             statement.setInt(5, categoryID);
             statement.setInt(6, supplierID);
-//            statement.execute(query);
             statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        executeQuery(query);
     }
 
     public int findId(String query) {

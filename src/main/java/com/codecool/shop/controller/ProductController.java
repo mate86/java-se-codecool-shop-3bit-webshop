@@ -3,9 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -22,8 +20,10 @@ public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoDatabase.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDatabase.getInstance();
         Cart cart=new Cart();
         cart.initFromSession(req);
 
