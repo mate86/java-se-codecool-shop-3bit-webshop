@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS Products
 (
   id SERIAL PRIMARY KEY,
   name VARCHAR(40),
-  description VARCHAR(150),
   defaultPrice FLOAT,
   defaultCurrency VARCHAR(40),
+  description VARCHAR(150),
   productCategory INTEGER,
   supplier INTEGER,
   FOREIGN KEY (productCategory) REFERENCES ProductCategories (id),
