@@ -78,8 +78,8 @@ public class Main {
         ProductDao productDataStore = ProductDaoDatabase.getInstance();
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazons latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product("Nokia 3410", 50, "USD", "Nokias legend.", phone, nokia));
+        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("Nokia 3410", 50, "USD", "Nokia's legend.", phone, nokia));
         productDataStore.add(new Product("Model 500", 20, "USD", "Phone of the century.", phone, westernelectric));
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));

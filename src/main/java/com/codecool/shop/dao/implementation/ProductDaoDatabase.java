@@ -39,10 +39,30 @@ public class ProductDaoDatabase implements ProductDao {
         int categoryID = findId(categoryQuery);
         int supplierID = findId(supplierQuery);
         String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
-                "VALUES ('" + product.getName() + "', " + product.getDefaultPrice() + ", '" + product.getDefaultCurrency().toString() + "', '" +
-                product.getDescription() + "', " + categoryID + ", " +
-                supplierID + ");";
-        executeQuery(query);
+                "VALUES (?, ?, ?, ?, ?, ?);";
+
+//        String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
+//                "VALUES ('" + product.getName() + "', " + product.getDefaultPrice() + ", '" + product.getDefaultCurrency().toString() + "', ?, " + categoryID + ", " +
+//                supplierID + ");";
+
+
+        try (Connection connection = getConnection();
+//             Statement statement = connection.createStatement();
+             PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setString(1, product.getName());
+            statement.setFloat(2, product.getDefaultPrice());
+            statement.setString(3, product.getDefaultCurrency().toString());
+            statement.setString(4, product.getDescription());
+            statement.setInt(5, categoryID);
+            statement.setInt(6, supplierID);
+//            statement.execute(query);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        executeQuery(query);
     }
 
     public int findId(String query) {
@@ -95,14 +115,14 @@ public class ProductDaoDatabase implements ProductDao {
                 DB_PASSWORD);
     }
 
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void executeQuery(String query) {
+//        try (Connection connection = getConnection();
+//             Statement statement = connection.createStatement();
+//        ) {
+//            statement.execute(query);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
