@@ -3,16 +3,15 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoDatabase implements ProductCategoryDao {
+public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
     private List<ProductCategory> DATA = new ArrayList<>();
-    private static ProductCategoryDaoDatabase instance = null;
+    private static ProductCategoryDaoJdbc instance = null;
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
     private static final String DB_USER = "postgres";
@@ -20,12 +19,12 @@ public class ProductCategoryDaoDatabase implements ProductCategoryDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductCategoryDaoDatabase() {
+    private ProductCategoryDaoJdbc() {
     }
 
-    public static ProductCategoryDaoDatabase getInstance() {
+    public static ProductCategoryDaoJdbc getInstance() {
         if (instance == null) {
-            instance = new ProductCategoryDaoDatabase();
+            instance = new ProductCategoryDaoJdbc();
         }
         return instance;
     }

@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductDaoDatabase implements ProductDao {
+public class ProductDaoJdbc implements ProductDao {
 
     private List<Product> DATA = new ArrayList<>();
-    private static ProductDaoDatabase instance = null;
+    private static ProductDaoJdbc instance = null;
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
     private static final String DB_USER = "postgres";
@@ -22,12 +22,12 @@ public class ProductDaoDatabase implements ProductDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoDatabase() {
+    private ProductDaoJdbc() {
     }
 
-    public static ProductDaoDatabase getInstance() {
+    public static ProductDaoJdbc getInstance() {
         if (instance == null) {
-            instance = new ProductDaoDatabase();
+            instance = new ProductDaoJdbc();
         }
         return instance;
     }
