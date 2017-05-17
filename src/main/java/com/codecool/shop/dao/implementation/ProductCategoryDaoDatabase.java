@@ -63,8 +63,8 @@ public class ProductCategoryDaoDatabase implements ProductCategoryDao {
 
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
+             Statement statement = connection.createStatement();
+        ) {
             statement.execute(query);
 
         } catch (SQLException e) {
@@ -79,7 +79,9 @@ public class ProductCategoryDaoDatabase implements ProductCategoryDao {
              ResultSet resultSet = statement.executeQuery(query);
         ) {
             while (resultSet.next()) {
-                ProductCategory productCategory = new ProductCategory(resultSet.getString("name"), resultSet.getString("description"), resultSet.getString("department"));
+                ProductCategory productCategory = new ProductCategory(resultSet.getString("name"),
+                        resultSet.getString("description"), resultSet.getString("department"));
+                productCategory.setId(resultSet.getInt("id"));
                 data.add(productCategory);
             }
 

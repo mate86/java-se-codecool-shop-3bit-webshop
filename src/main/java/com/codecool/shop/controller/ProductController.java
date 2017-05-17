@@ -22,25 +22,24 @@ public class ProductController {
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+
         ProductDao productDataStore = ProductDaoDatabase.getInstance();
         SupplierDao supplierDataStore = SupplierDaoDatabase.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDatabase.getInstance();
-        Cart cart=new Cart();
+        Cart cart = new Cart();
         cart.initFromSession(req);
 
         Map params = new HashMap<>();
         params.put("cart", cart);
         params.put("categories", productCategoryDataStore.getAll());
         params.put("suppliers", supplierDataStore.getAll());
-        if(req.queryParams("category")!=null) {
+        if (req.queryParams("category") != null) {
             params.put("filter", productCategoryDataStore.find(Integer.parseInt(req.queryParams("category"))));
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(req.queryParams("category")))));
-        }
-        else if(req.queryParams("supplier")!=null) {
+        } else if (req.queryParams("supplier") != null) {
             params.put("filter", supplierDataStore.find(Integer.parseInt(req.queryParams("supplier"))));
             params.put("products", productDataStore.getBy(supplierDataStore.find(Integer.parseInt(req.queryParams("supplier")))));
-        }
-        else{
+        } else {
             params.put("filter", productCategoryDataStore.find(1));
             params.put("products", productDataStore.getAll());
         }

@@ -124,6 +124,7 @@ public class ProductDaoDatabase implements ProductDao {
                         resultSet.getFloat("defaultprice"), resultSet.getString("defaultcurrency"),
                         resultSet.getString("description"), productCategory,
                         supplier);
+                product.setId(resultSet.getInt("id"));
                 data.add(product);
             }
 

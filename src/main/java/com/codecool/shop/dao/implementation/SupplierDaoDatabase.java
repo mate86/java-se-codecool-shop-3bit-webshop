@@ -61,8 +61,8 @@ public class SupplierDaoDatabase implements SupplierDao {
 
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
+             Statement statement = connection.createStatement();
+        ) {
             statement.execute(query);
 
         } catch (SQLException e) {
@@ -77,7 +77,9 @@ public class SupplierDaoDatabase implements SupplierDao {
              ResultSet resultSet = statement.executeQuery(query);
         ) {
             while (resultSet.next()) {
-                Supplier supplier = new Supplier(resultSet.getString("name"), resultSet.getString("description"));
+                Supplier supplier = new Supplier(resultSet.getString("name"),
+                        resultSet.getString("description"));
+                supplier.setId(resultSet.getInt("id"));
                 data.add(supplier);
             }
 
