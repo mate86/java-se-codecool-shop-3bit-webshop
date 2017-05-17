@@ -47,6 +47,8 @@ public class SupplierDaoDatabase implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() {
+        String query = "SELECT * FROM suppliers;";
+        DATA = getDataFromDB(query);
         return DATA;
     }
 
@@ -59,12 +61,31 @@ public class SupplierDaoDatabase implements SupplierDao {
 
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
+             Statement statement = connection.createStatement();
+        ) {
             statement.execute(query);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Supplier> getDataFromDB(String query) {
+        List<Supplier> data = new ArrayList<>();
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                Supplier supplier = new Supplier(resultSet.getString("name"),
+                        resultSet.getString("description"));
+                supplier.setId(resultSet.getInt("id"));
+                data.add(supplier);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

@@ -29,7 +29,7 @@ public class Main {
 
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
-           return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
+            return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
         });
 
         //CART ROUTES
@@ -84,6 +84,5 @@ public class Main {
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
         productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
-
     }
 }

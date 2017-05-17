@@ -41,13 +41,7 @@ public class ProductDaoDatabase implements ProductDao {
         String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
 
-//        String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
-//                "VALUES ('" + product.getName() + "', " + product.getDefaultPrice() + ", '" + product.getDefaultCurrency().toString() + "', ?, " + categoryID + ", " +
-//                supplierID + ");";
-
-
         try (Connection connection = getConnection();
-//             Statement statement = connection.createStatement();
              PreparedStatement statement = connection.prepareStatement(query);
         ) {
             statement.setString(1, product.getName());
@@ -56,13 +50,11 @@ public class ProductDaoDatabase implements ProductDao {
             statement.setString(4, product.getDescription());
             statement.setInt(5, categoryID);
             statement.setInt(6, supplierID);
-//            statement.execute(query);
             statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        executeQuery(query);
     }
 
     public int findId(String query) {
@@ -95,6 +87,8 @@ public class ProductDaoDatabase implements ProductDao {
 
     @Override
     public List<Product> getAll() {
+        String query = "SELECT * FROM products;";
+        DATA = getDataFromDB(query);
         return DATA;
     }
 
@@ -115,14 +109,61 @@ public class ProductDaoDatabase implements ProductDao {
                 DB_PASSWORD);
     }
 
-//    private void executeQuery(String query) {
-//        try (Connection connection = getConnection();
-//             Statement statement = connection.createStatement();
-//        ) {
-//            statement.execute(query);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public List<Product> getDataFromDB(String query) {
+        List<Product> data = new ArrayList<>();
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                int categoryID = resultSet.getInt("productcategory");
+                int supplierID = resultSet.getInt("supplier");
+                Supplier supplier = getSupplierFromDB(supplierID);
+                ProductCategory productCategory = getProductCategoryFromDB(categoryID);
+                Product product = new Product(resultSet.getString("name"),
+                        resultSet.getFloat("defaultprice"), resultSet.getString("defaultcurrency"),
+                        resultSet.getString("description"), productCategory,
+                        supplier);
+                product.setId(resultSet.getInt("id"));
+                data.add(product);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public ProductCategory getProductCategoryFromDB(int id) {
+        String query = "SELECT * FROM productcategories WHERE id=" + id + ";";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                ProductCategory productCategory = new ProductCategory(resultSet.getString("name"),
+                        resultSet.getString("description"), resultSet.getString("department"));
+                return productCategory;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Supplier getSupplierFromDB(int id) {
+        String query = "SELECT * FROM suppliers WHERE id=" + id + ";";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                Supplier supplier = new Supplier(resultSet.getString("name"), resultSet.getString("description"));
+                return supplier;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
