@@ -5,9 +5,6 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 
 import spark.Request;
 import spark.Response;
@@ -23,9 +20,9 @@ public class ProductController {
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
-        ProductDao productDataStore = ProductDaoDatabase.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoDatabase.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDatabase.getInstance();
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
 

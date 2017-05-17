@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-public class SupplierDaoDatabase implements SupplierDao {
+public class SupplierDaoJdbc implements SupplierDao {
 
     private List<Supplier> DATA = new ArrayList<>();
-    private static SupplierDaoDatabase instance = null;
+    private static SupplierDaoJdbc instance = null;
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
     private static final String DB_USER = "postgres";
@@ -18,12 +18,12 @@ public class SupplierDaoDatabase implements SupplierDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private SupplierDaoDatabase() {
+    private SupplierDaoJdbc() {
     }
 
-    public static SupplierDaoDatabase getInstance() {
+    public static SupplierDaoJdbc getInstance() {
         if (instance == null) {
-            instance = new SupplierDaoDatabase();
+            instance = new SupplierDaoJdbc();
         }
         return instance;
     }
