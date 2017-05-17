@@ -9,7 +9,13 @@ import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.sql.*;
+
 public class Main {
+
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "postgres";
 
     public static void main(String[] args) {
 
@@ -19,7 +25,8 @@ public class Main {
         port(8888);
 
         // populate some data for the memory storage
-        populateData();
+//        populateData();
+        initDatabase();
 
         // Always start with more specific routes
         get("/hello", (req, res) -> "Hello World");
@@ -44,6 +51,29 @@ public class Main {
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
+    }
+
+    public static void initDatabase() {
+        String supplierQuery = "SELECT * FROM products;";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(supplierQuery);
+        ) {
+            if (!resultSet.next()) {
+                populateData();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(
+                DATABASE,
+                DB_USER,
+                DB_PASSWORD);
     }
 
     public static void populateData() {
