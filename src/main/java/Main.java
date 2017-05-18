@@ -5,6 +5,7 @@ import com.codecool.shop.controller.*;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+
 import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -12,10 +13,6 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import java.sql.*;
 
 public class Main {
-
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
 
     public static void main(String[] args) {
 
@@ -56,7 +53,7 @@ public class Main {
     public static void initDatabase() {
         String supplierQuery = "SELECT * FROM products;";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(supplierQuery);
         ) {
@@ -67,13 +64,6 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
     }
 
     public static void populateData() {

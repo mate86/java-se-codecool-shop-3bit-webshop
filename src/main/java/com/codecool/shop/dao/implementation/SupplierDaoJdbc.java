@@ -12,10 +12,6 @@ public class SupplierDaoJdbc implements SupplierDao {
     private List<Supplier> DATA = new ArrayList<>();
     private static SupplierDaoJdbc instance = null;
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
-
     /* A private Constructor prevents any other class from instantiating.
      */
     private SupplierDaoJdbc() {
@@ -52,15 +48,8 @@ public class SupplierDaoJdbc implements SupplierDao {
         return DATA;
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
     private void executeQuery(String query) {
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
         ) {
             statement.execute(query);
@@ -72,7 +61,7 @@ public class SupplierDaoJdbc implements SupplierDao {
 
     public List<Supplier> getDataFromDB(String query) {
         List<Supplier> data = new ArrayList<>();
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
