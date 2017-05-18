@@ -3,6 +3,7 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.interfaces.*;
 import spark.Request;
@@ -100,7 +101,7 @@ public class Cart implements Sessionable {
                 String[] tmpProduct = products[i].split(",");
 
                 lineItem.add(new LineItem(
-                        ProductDaoMem.getInstance().find(Integer.parseInt(tmpProduct[0])),
+                        ProductDaoJdbc.getInstance().find(Integer.parseInt(tmpProduct[0])),
                         Integer.parseInt(tmpProduct[1]),
                         Float.parseFloat(tmpProduct[2])
                 ));
