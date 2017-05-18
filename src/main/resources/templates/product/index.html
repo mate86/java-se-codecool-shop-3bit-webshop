@@ -28,7 +28,7 @@
 </head>
 
 <body>
-<a style="float:right" href="/cart">
+<a style="float:right;text-decoration:none;color:white" href="/cart">
     <svg width="100" height="100" viewBox="0 0 600 600">
         <g>
             <path style="fill:black;" d="M548.873,164.412c4.896,6.12,6.73,13.464,5.508,22.032l-23.256,133.417
@@ -44,7 +44,7 @@
 			 M427.697,455.113c12.238,0,22.645,4.284,31.213,12.854c8.564,8.565,12.852,18.972,12.852,31.212
 			c0,12.237-4.285,22.746-12.852,31.518c-8.568,8.772-18.975,13.158-31.213,13.158c-12.24,0-22.646-4.386-31.211-13.158
 			c-8.568-8.771-12.855-19.278-12.855-31.518s4.285-22.646,12.855-31.212C405.053,459.397,415.457,455.113,427.697,455.113z"></path>
-            <text id="cart" x="50%" y="50%" fill="white" style="font-size:190;text-anchor:middle" th:text="${cart.getCartSize()}"></text>
+            <div id="cart" style="position:relative;right:-45px;top:-85px;font-size:30px;text-anchor:middle" th:text="${cart.getCartSize()}"></div>
         </g>
     </svg>
 </a>
