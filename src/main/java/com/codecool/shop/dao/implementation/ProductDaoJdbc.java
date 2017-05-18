@@ -16,10 +16,6 @@ public class ProductDaoJdbc implements ProductDao {
     private List<Product> DATA = new ArrayList<>();
     private static ProductDaoJdbc instance = null;
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
-
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductDaoJdbc() {
@@ -41,7 +37,7 @@ public class ProductDaoJdbc implements ProductDao {
         String query = "INSERT INTO products (name, defaultprice, defaultcurrency, description, productcategory, supplier) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
         ) {
             statement.setString(1, product.getName());
@@ -58,7 +54,7 @@ public class ProductDaoJdbc implements ProductDao {
     }
 
     public int findId(String query) {
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
@@ -102,16 +98,9 @@ public class ProductDaoJdbc implements ProductDao {
         return DATA.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
     public List<Product> getDataFromDB(String query) {
         List<Product> data = new ArrayList<>();
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
@@ -136,7 +125,7 @@ public class ProductDaoJdbc implements ProductDao {
 
     public ProductCategory getProductCategoryFromDB(int id) {
         String query = "SELECT * FROM productcategories WHERE id=" + id + ";";
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
@@ -153,7 +142,7 @@ public class ProductDaoJdbc implements ProductDao {
 
     public Supplier getSupplierFromDB(int id) {
         String query = "SELECT * FROM suppliers WHERE id=" + id + ";";
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {

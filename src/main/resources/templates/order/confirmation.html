@@ -39,7 +39,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div class="well well-sm">
-            <strong>Confirmation - Havent developed it yet!</strong>
+            <strong>Confirmation</strong>
         </div>
     </div>
     <div class="col-md-1"></div>
@@ -47,13 +47,91 @@
 
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-10" th:text="${cart.order}">
-
-
-
+    <div class="col-md-10">
+        <div class="alert alert-success"><strong>Successful order!</strong></div>
     </div>
     <div class="col-md-1"></div>
 </div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div>
+            <div class="td-5 title c">Name</div>
+            <div class="td-5 title c">Quantity</div>
+            <div class="td-5 title c">Unit price</div>
+            <div class="td-5 title c">Net total</div>
+            <div class="td-5 title c">Total (with VAT)</div>
+        </div>
+
+        <div th:each="product,iterStat : ${cart.getProducts()}">
+            <div class="td-5 c newline" th:text="${product.product.name}"></div>
+            <div class="td-5 c" th:text="${product.quantity}"></div>
+            <div class="td-5 c" th:text="${product.price}"></div>
+            <div class="td-5 c" th:text="${product.getYield()}"></div>
+            <div class="td-5 c" th:text="${product.getVatPrice()}"></div>
+        </div>
+
+        <div>
+            <div class="td-5 newline"></div>
+            <div class="td-5"></div>
+            <div class="td-5"></div>
+            <div class="td-5 c title">All:</div>
+            <div class="td-5 c title" th:text="${cart.countTotal()}"></div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Name</div>
+    <div class="col-md-5 c" th:text="${cart.order.getName()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Email</div>
+    <div class="col-md-5 c" th:text="${cart.order.getEmail()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Phone number</div>
+    <div class="col-md-5 c" th:text="${cart.order.getPhoneNumber()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Billing address</div>
+    <div class="col-md-5 c" th:text="${cart.order.getBillingAddress()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Shipping address</div>
+    <div class="col-md-5 c" th:text="${cart.order.getShippingAddress()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Additional info</div>
+    <div class="col-md-5 c" th:text="${cart.order.getDescription()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 c b">Payment</div>
+    <div class="col-md-5 c" th:text="${cart.order.getPaymentMethod().getName()}"></div>
+    <div class="col-md-1"></div>
+</div>
+
 <br /><br />
 
 

@@ -5,6 +5,7 @@ import com.codecool.shop.controller.*;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+
 import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -12,10 +13,6 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import java.sql.*;
 
 public class Main {
-
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
 
     public static void main(String[] args) {
 
@@ -46,7 +43,8 @@ public class Main {
 
         //CHECKOUT ROUTES
         get("/order/checkout", OrderController::checkout, new ThymeleafTemplateEngine());
-        post("/order/confirmation", OrderController::confirmation, new ThymeleafTemplateEngine());
+        get("/order/payment", OrderController::payment, new ThymeleafTemplateEngine());
+        get("/order/confirmation", OrderController::confirmation, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
@@ -55,10 +53,10 @@ public class Main {
     public static void initDatabase() {
         String supplierQuery = "SELECT * FROM products;";
 
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(supplierQuery);
-        ) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(supplierQuery);
             if (!resultSet.next()) {
                 populateData();
             }
@@ -66,13 +64,6 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
     }
 
     public static void populateData() {
@@ -113,5 +104,18 @@ public class Main {
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
         productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
+
+        //setting up the basic payment methods
+        PaymentMethodDao paymentDataStore = PaymentMethodDaoJdbc.getInstance();
+        paymentDataStore.add("creditcard");
+        paymentDataStore.add("paypal");
+
+        //setting up statuses
+        StatusDao statusDataStore = StatusDaoJdbc.getInstance();
+        statusDataStore.add("checkout");
+        statusDataStore.add("payed");
+
+
     }
+
 }

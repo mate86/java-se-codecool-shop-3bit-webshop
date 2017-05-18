@@ -13,10 +13,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private List<ProductCategory> DATA = new ArrayList<>();
     private static ProductCategoryDaoJdbc instance = null;
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
-
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductCategoryDaoJdbc() {
@@ -53,15 +49,8 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         return DATA;
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
     private void executeQuery(String query) {
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
         ) {
             statement.execute(query);
@@ -73,7 +62,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
     public List<ProductCategory> getDataFromDB(String query) {
         List<ProductCategory> data = new ArrayList<>();
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
