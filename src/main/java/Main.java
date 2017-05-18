@@ -9,7 +9,13 @@ import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.sql.*;
+
 public class Main {
+
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "postgres";
 
     public static void main(String[] args) {
 
@@ -19,7 +25,7 @@ public class Main {
         port(8888);
 
         // populate some data for the memory storage
-        populateData();
+        initDatabase();
 
         // Always start with more specific routes
         get("/hello", (req, res) -> "Hello World");
@@ -29,7 +35,7 @@ public class Main {
 
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
-           return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
+            return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
         });
 
         //CART ROUTES
@@ -46,9 +52,33 @@ public class Main {
         enableDebugScreen();
     }
 
+    public static void initDatabase() {
+        String supplierQuery = "SELECT * FROM products;";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(supplierQuery);
+        ) {
+            if (!resultSet.next()) {
+                populateData();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(
+                DATABASE,
+                DB_USER,
+                DB_PASSWORD);
+    }
+
     public static void populateData() {
         //setting up a new suppliers
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         Supplier nokia = new Supplier("Nokia", "Connecting people");
@@ -63,7 +93,8 @@ public class Main {
         supplierDataStore.add(funfactory);
 
         //setting up a new product categories
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory phone = new ProductCategory("Phone", "Hardware", "A phone.");
         ProductCategory gift = new ProductCategory("Gifts", "Accessories", "Fun stuff.");
@@ -72,7 +103,8 @@ public class Main {
         productCategoryDataStore.add(gift);
 
         //setting up products and printing it
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
@@ -81,6 +113,5 @@ public class Main {
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
         productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
-
     }
 }
