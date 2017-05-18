@@ -14,15 +14,19 @@ public class Order {
     private String billingAddress;
     private String shippingAddress;
     private String description;
-    private String paymentMethod;
+    private int paymentMethod;
     private Date date;
     private int status;
 
-    public Order(int userId, String description) {
-        this(0, userId, null, null, null, null, null, description, new Date(),0);
+    public Order() {
+        this(0, 0, null, null, null, null, null, null,0, new Date(),0);
     }
 
-    public Order(int id, int userId, String name, String email, String phoneNumber, String billingAddress, String shippingAddress, String description, Date date, int status) {
+    public Order(int userId, String description) {
+        this(0, userId, null, null, null, null, null, description,0, new Date(),0);
+    }
+
+    public Order(int id, int userId, String name, String email, String phoneNumber, String billingAddress, String shippingAddress, String description, int paymentMethod, Date date, int status) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -31,6 +35,7 @@ public class Order {
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
         this.description = description;
+        this.paymentMethod = paymentMethod;
         this.date = date;
         this.status = status;
     }
@@ -76,16 +81,4 @@ public class Order {
         this.status = status;
     }
 
-    public String toString() {
-        return id + ";"+
-               userId + ";" +
-               name + ";" +
-               email + ";" +
-               phoneNumber + ";" +
-               billingAddress + ";" +
-               shippingAddress + ";" +
-               description + ";" +
-               date.getTime() + ";" +
-               status;
-    }
 }
