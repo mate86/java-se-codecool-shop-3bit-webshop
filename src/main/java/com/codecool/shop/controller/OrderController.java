@@ -1,10 +1,11 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.OrderDaoJdbc;
 import com.codecool.shop.model.Cart;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public class OrderController {
                 req.queryParams("shippingAddress"),
                 req.queryParams("description")
         );
+        cart.order.setStatus(1);
         cart.saveToSession(req);
 
         params.put("cart", cart);
@@ -52,19 +54,22 @@ public class OrderController {
         cart.initFromSession(req);
 
         //Set changings on order and save
-        cart.order.setByUser(
-                req.queryParams("name"),
-                req.queryParams("email"),
-                req.queryParams("phoneNumber"),
-                req.queryParams("billingAddress"),
-                req.queryParams("shippingAddress"),
-                req.queryParams("description")
-        );
-        cart.saveToSession(req);
-
-
+        cart.order.setPaymentMethod(Integer.parseInt(req.queryParams("payment")));
+        cart.order.setStatus(2);
+        cart.dropSession(req.session());
         params.put("cart", cart);
 
+        OrderDaoJdbc.getInstance().add(
+                cart.order.getName(),
+                cart.order.getEmail(),
+                cart.order.getPhoneNumber(),
+                cart.order.getBillingAddress(),
+                cart.order.getShippingAddress(),
+                cart.order.getDescription(),
+                cart.order.getDate(),
+                cart.order.getPaymentMethod().getId(),
+                cart.order.getStatus()
+        );
         return new ModelAndView(params, "order/confirmation");
     }
 

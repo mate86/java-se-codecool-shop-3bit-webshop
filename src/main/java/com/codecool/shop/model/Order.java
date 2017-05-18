@@ -1,6 +1,9 @@
 package com.codecool.shop.model;
 
-import java.util.Date;
+import com.codecool.shop.dao.implementation.PaymentMethodDaoJdbc;
+
+import java.sql.Date;
+
 
 /**
  * Created by flowerpower on 2017. 05. 02..
@@ -19,11 +22,11 @@ public class Order {
     private int status;
 
     public Order() {
-        this(0, 0, null, null, null, null, null, null,0, new Date(),0);
+        this(0, "");
     }
 
     public Order(int userId, String description) {
-        this(0, userId, null, null, null, null, null, description,0, new Date(),0);
+        this(0, userId, null, null, null, null, null, description,0, new Date(System.currentTimeMillis()),0);
     }
 
     public Order(int id, int userId, String name, String email, String phoneNumber, String billingAddress, String shippingAddress, String description, int paymentMethod, Date date, int status) {
@@ -81,4 +84,47 @@ public class Order {
         this.status = status;
     }
 
+    public void setPaymentMethod(int paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return PaymentMethodDaoJdbc.getInstance().find(paymentMethod);
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getStatus() {
+        return status;
+    }
 }

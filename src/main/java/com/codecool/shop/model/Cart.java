@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.interfaces.*;
 import spark.Request;
+import spark.Session;
 
 /**
  * Created by flowerpower on 2017. 05. 02..
@@ -41,6 +42,10 @@ public class Cart implements Sessionable {
         }
     }
 
+    public void dropSession(Session session) {
+        session.removeAttribute("cart");
+    }
+
     public LineItem getProduct(int index) {
         return lineItem.get(index);
     }
@@ -73,22 +78,6 @@ public class Cart implements Sessionable {
     public void initOrderFromSession(Request request) {
         if (request.session().attribute("order") != null) {
             order = request.session().attribute("order");
-//
-//            Date orderDate = new Date();
-//            orderDate.setTime(Long.parseLong(sessionValues[8]));
-//
-//            order = new Order(
-//                    Integer.parseInt(sessionValues[0]),
-//                    Integer.parseInt(sessionValues[1]),
-//                    sessionValues[2],
-//                    sessionValues[3],
-//                    sessionValues[4],
-//                    sessionValues[5],
-//                    sessionValues[6],
-//                    sessionValues[7],
-//                    orderDate,
-//                    Integer.parseInt(sessionValues[9])
-//            );
 
         }
     }
