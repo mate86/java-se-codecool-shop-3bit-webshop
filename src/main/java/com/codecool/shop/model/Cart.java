@@ -50,9 +50,9 @@ public class Cart implements Sessionable {
     }
 
     public Integer getCartSize() {
-        int cartsize=0;
-        for(int item=0;item<lineItem.size();item++){
-            cartsize+=lineItem.get(item).quantity;
+        int cartsize = 0;
+        for (int item = 0; item < lineItem.size(); item++) {
+            cartsize += lineItem.get(item).quantity;
         }
         return cartsize;
     }
@@ -94,7 +94,7 @@ public class Cart implements Sessionable {
     }
 
     public void initLineItemsFromSession(Request request) {
-        if (request.session().attribute("lineitem") != null) {
+        if (request.session().attribute("lineitem") != "" && request.session().attribute("lineitem") != null) {
             String[] products = request.session().attribute("lineitem").toString().split(";");
 
             for (int i = 0; i < products.length; i++) {
@@ -122,7 +122,9 @@ public class Cart implements Sessionable {
         }
 
         if (sessionValue.trim() != "") {
-            request.session().attribute("lineitem", sessionValue.substring(0, sessionValue.length()-1));
+            request.session().attribute("lineitem", sessionValue.substring(0, sessionValue.length() - 1));
+        } else {
+            request.session().attribute("lineitem", sessionValue);
         }
     }
 
