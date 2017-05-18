@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
 import spark.ModelAndView;
@@ -23,8 +24,8 @@ public class CartController {
         return new ModelAndView(params, "cart/list");
     }
 
-    public static ModelAndView addProduct(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+    public static String addProduct(Request req, Response res) {
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
 
@@ -34,11 +35,11 @@ public class CartController {
 
         Map params = new HashMap<>();
         params.put("cart", cart);
-        return new ModelAndView(params, "cart/list");
+        return cart.getCartSize().toString();
     }
 
     public static ModelAndView removeProduct(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
 
@@ -52,7 +53,7 @@ public class CartController {
     }
 
     public static ModelAndView modifyProduct(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
 
