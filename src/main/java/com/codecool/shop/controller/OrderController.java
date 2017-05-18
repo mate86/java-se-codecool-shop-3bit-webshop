@@ -21,6 +21,29 @@ public class OrderController {
         return new ModelAndView(params, "order/checkout");
     }
 
+    public static ModelAndView payment(Request req, Response res) {
+
+        //Instantiate needed variables
+        Map params = new HashMap<>();
+        Cart cart = new Cart();
+        cart.initFromSession(req);
+
+        //Set changings on order and save
+        cart.order.setByUser(
+                req.queryParams("name"),
+                req.queryParams("email"),
+                req.queryParams("phoneNumber"),
+                req.queryParams("billingAddress"),
+                req.queryParams("shippingAddress"),
+                req.queryParams("description")
+        );
+        cart.saveToSession(req);
+
+        params.put("cart", cart);
+
+        return new ModelAndView(params, "order/payment");
+    }
+
     public static ModelAndView confirmation(Request req, Response res) {
 
         //Instantiate needed variables
@@ -44,4 +67,5 @@ public class OrderController {
 
         return new ModelAndView(params, "order/confirmation");
     }
+
 }

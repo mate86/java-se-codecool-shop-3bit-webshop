@@ -14,6 +14,7 @@ public class Order {
     private String billingAddress;
     private String shippingAddress;
     private String description;
+    private String paymentMethod;
     private Date date;
     private int status;
 

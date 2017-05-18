@@ -1,6 +1,24 @@
+.td-1 {
+    float: left;
+    width:100%;
+    margin-top:10px;
+}
+
 .td-2 {
     float: left;
     width:50%;
+    margin-top:10px;
+}
+
+.td-4 {
+    float: left;
+    width:25%;
+    margin-top:10px;
+}
+
+.td-5 {
+    float: left;
+    width:20%;
     margin-top:10px;
 }
 
@@ -13,12 +31,6 @@
 .td-80 {
     float: left;
     width:80%;
-    margin-top:10px;
-}
-
-.td-5 {
-    float: left;
-    width:20%;
     margin-top:10px;
 }
 
@@ -35,8 +47,16 @@
     text-align: center;
 }
 
+.block-c {
+    margin: 0 auto !important;
+}
+
 .r {
     text-align: right;
+}
+
+.b {
+    font-weight:bold;
 }
 
 .small {
@@ -45,4 +65,25 @@
 
 .inline {
     display:inline !important;
+}
+
+.nomargin {
+    margin:0px !important;
+}
+
+.jumbotron {
+    float: left;
+    width:100%;
+}
+
+.half {
+    width:50% !important;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.small-top-margin {
+    margin-top:10px;
 }
