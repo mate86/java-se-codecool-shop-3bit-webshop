@@ -56,7 +56,6 @@ public class Cart implements Sessionable {
         return cartsize;
     }
 
-
     public void initFromSession(Request request) {
         initOrderFromSession(request);
         initLineItemsFromSession(request);

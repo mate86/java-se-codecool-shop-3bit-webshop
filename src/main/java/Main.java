@@ -40,7 +40,8 @@ public class Main {
 
         //CHECKOUT ROUTES
         get("/order/checkout", OrderController::checkout, new ThymeleafTemplateEngine());
-        post("/order/confirmation", OrderController::confirmation, new ThymeleafTemplateEngine());
+        get("/order/payment", OrderController::payment, new ThymeleafTemplateEngine());
+        get("/order/confirmation", OrderController::confirmation, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
