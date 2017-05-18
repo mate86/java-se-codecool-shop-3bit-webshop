@@ -9,10 +9,6 @@ public class StatusDaoJdbc implements StatusDao {
 
     private static StatusDaoJdbc instance = null;
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
-
     /* A private Constructor prevents any other class from instantiating.
      */
     private StatusDaoJdbc() {
@@ -40,17 +36,8 @@ public class StatusDaoJdbc implements StatusDao {
         executeQuery(query);
     }
 
-
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
     private void executeQuery(String query) {
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
         ) {
             statement.execute(query);
@@ -63,7 +50,7 @@ public class StatusDaoJdbc implements StatusDao {
     public Status getDataFromDB(String query) {
 
         try {
-            Connection connection = getConnection();
+            Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
