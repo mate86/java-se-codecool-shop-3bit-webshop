@@ -29,3 +29,32 @@ CREATE TABLE IF NOT EXISTS Products
   FOREIGN KEY (productCategory) REFERENCES ProductCategories (id),
   FOREIGN KEY (supplier) REFERENCES Suppliers(id)
 );
+
+CREATE TABLE IF NOT EXISTS PaymentMethods
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(40) not null
+);
+
+CREATE TABLE IF NOT EXISTS Statuses
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(40) not null
+);
+
+CREATE TABLE IF NOT EXISTS Orders
+(
+  id serial primary key,
+  name text not null,
+  email text not null,
+  phoneNumber text not null,
+  billingAddress text not null,
+  shippingAddress text not null,
+  description text not null,
+  date date not null,
+  userid int,
+  paymentMethod int not null,
+  status int not null,
+  FOREIGN KEY (paymentMethod) REFERENCES PaymentMethods(id),
+  FOREIGN KEY (status) REFERENCES Statuses(id)
+);

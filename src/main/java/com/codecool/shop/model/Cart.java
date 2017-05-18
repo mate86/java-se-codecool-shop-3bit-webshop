@@ -72,23 +72,23 @@ public class Cart implements Sessionable {
     // *** AID METHODS ***
     public void initOrderFromSession(Request request) {
         if (request.session().attribute("order") != null) {
-            String[] sessionValues = request.session().attribute("order").toString().split(";");
-
-            Date orderDate = new Date();
-            orderDate.setTime(Long.parseLong(sessionValues[8]));
-
-            order = new Order(
-                    Integer.parseInt(sessionValues[0]),
-                    Integer.parseInt(sessionValues[1]),
-                    sessionValues[2],
-                    sessionValues[3],
-                    sessionValues[4],
-                    sessionValues[5],
-                    sessionValues[6],
-                    sessionValues[7],
-                    orderDate,
-                    Integer.parseInt(sessionValues[9])
-            );
+            order = request.session().attribute("order");
+//
+//            Date orderDate = new Date();
+//            orderDate.setTime(Long.parseLong(sessionValues[8]));
+//
+//            order = new Order(
+//                    Integer.parseInt(sessionValues[0]),
+//                    Integer.parseInt(sessionValues[1]),
+//                    sessionValues[2],
+//                    sessionValues[3],
+//                    sessionValues[4],
+//                    sessionValues[5],
+//                    sessionValues[6],
+//                    sessionValues[7],
+//                    orderDate,
+//                    Integer.parseInt(sessionValues[9])
+//            );
 
         }
     }

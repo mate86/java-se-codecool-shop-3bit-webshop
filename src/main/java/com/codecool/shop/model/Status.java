@@ -3,14 +3,14 @@ package com.codecool.shop.model;
 /**
  * Created by flowerpower on 2017. 05. 02..
  */
-public class PaymentMethod extends BaseModel {
+public class Status extends BaseModel {
 
-    public PaymentMethod() {
+    public Status() {
         super("");
         setId(0);
     }
 
-    public PaymentMethod(int id, String name) {
+    public Status(int id, String name) {
         super(name);
         setId(id);
     }

@@ -104,5 +104,18 @@ public class Main {
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
         productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
+
+        //setting up the basic payment methods
+        PaymentMethodDao paymentDataStore = PaymentMethodDaoJdbc.getInstance();
+        paymentDataStore.add("creditcard");
+        paymentDataStore.add("paypal");
+
+        //setting up statuses
+        StatusDao statusDataStore = StatusDaoJdbc.getInstance();
+        statusDataStore.add("checkout");
+        statusDataStore.add("payed");
+
+
     }
+
 }
