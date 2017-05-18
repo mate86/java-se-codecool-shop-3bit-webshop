@@ -53,10 +53,10 @@ public class Main {
     public static void initDatabase() {
         String supplierQuery = "SELECT * FROM products;";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(supplierQuery);
-        ) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(supplierQuery);
             if (!resultSet.next()) {
                 populateData();
             }

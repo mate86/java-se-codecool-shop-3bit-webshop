@@ -25,8 +25,9 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     public void add(String name, String email, String phonenumber, String billingaddress, String shippingaddress, String description, Date date, int paymentMethod, int status) {
-        String query = "INSERT INTO orders (name, email, phonenumber, billingaddress, shippingaddress, description, date, paymentMethod, status)" +
-                       "VALUES ('"+name+"', '"+email+"', '"+phonenumber+"', '"+billingaddress+"', '"+shippingaddress+"', '"+description+"', '"+date+"', "+paymentMethod+", "+status+");";
+        String query = "INSERT INTO orders (name, email, phonenumber, billingaddress, shippingaddress, description, date, paymentMethod, status, userid)" +
+                       " VALUES ('"+name+"', '"+email+"', '"+phonenumber+"', '"+billingaddress+"', '"+shippingaddress+"', '"+description+"', '"+date+"', "+paymentMethod+", "+status+", 0);";
+        System.out.println(query);
         executeQuery(query);
     }
 
@@ -72,7 +73,8 @@ public class OrderDaoJdbc implements OrderDao {
                     resultSet.getString("name"),
                     resultSet.getString("email"),
                     resultSet.getString("phoneNumber"),
-                    resultSet.getString("billingAddress"), resultSet.getString("shippingAddress"),
+                    resultSet.getString("billingAddress"),
+                    resultSet.getString("shippingAddress"),
                     resultSet.getString("description"),
                     resultSet.getInt("paymentMethod"),
                     resultSet.getDate("date"),
