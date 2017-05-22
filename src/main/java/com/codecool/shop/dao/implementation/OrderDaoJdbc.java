@@ -69,11 +69,12 @@ public class OrderDaoJdbc implements OrderDao {
 
         try {
             Connection connection = DatabaseConnection.getConnection();
-            logger.info("Database connection is OK!");
+            logger.debug("Database connection is OK!");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                logger.debug("Leaving getDataFromDB()");
                 return new Order(
                     resultSet.getInt("id"),
                     0,

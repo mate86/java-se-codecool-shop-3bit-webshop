@@ -70,11 +70,12 @@ public class PaymentMethodDaoJdbc implements PaymentMethodDao {
 
         try {
             Connection connection = DatabaseConnection.getConnection();
-            logger.info("Database connection is OK!");
+            logger.debug("Database connection is OK!");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                logger.debug("Leaving getDataFromDB()");
                 return new PaymentMethod(
                         resultSet.getInt("id"),
                         resultSet.getString("name")
