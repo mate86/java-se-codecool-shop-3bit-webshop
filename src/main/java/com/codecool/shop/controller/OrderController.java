@@ -22,6 +22,8 @@ public class OrderController {
         Map params = new HashMap<>();
         Cart cart = new Cart();
         cart.initFromSession(req);
+        logger.debug("Cart initialized from session");
+
         params.put("cart", cart);
         logger.debug("Params length: {}", params.size());
         logger.debug("Leaving checkout()");
@@ -35,6 +37,7 @@ public class OrderController {
         Map params = new HashMap<>();
         Cart cart = new Cart();
         cart.initFromSession(req);
+        logger.debug("Cart initialized from session");
 
         //Set changings on order and save
         logger.debug("Setting order's user");
@@ -64,12 +67,13 @@ public class OrderController {
         Map params = new HashMap<>();
         Cart cart = new Cart();
         cart.initFromSession(req);
+        logger.debug("Cart initialized from session");
 
         //Set changings on order and save
-        logger.debug("Setting order's payment method");
         cart.order.setPaymentMethod(Integer.parseInt(req.queryParams("payment")));
-        logger.debug("Setting order's status");
+        logger.debug("Setting order's payment method OK");
         cart.order.setStatus(2);
+        logger.debug("Setting order's status OK");
         cart.dropSession(req.session());
         params.put("cart", cart);
 

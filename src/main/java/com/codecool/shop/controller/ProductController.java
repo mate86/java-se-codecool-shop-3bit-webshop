@@ -25,6 +25,7 @@ public class ProductController {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
+        logger.debug("Cart initialized from session");
 
         Map params = new HashMap<>();
         params.put("cart", cart);
