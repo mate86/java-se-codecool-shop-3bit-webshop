@@ -12,7 +12,11 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.sql.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -55,20 +59,23 @@ public class Main {
 
         try {
             Connection connection = DatabaseConnection.getConnection();
+            logger.info("Database connection is OK!");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(supplierQuery);
             if (!resultSet.next()) {
                 populateData();
+                logger.info("Populating database is OK!");
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error! Populating database failed!", e);
         }
+        logger.info("Database initialization is OK!");
     }
 
     public static void populateData() {
         //setting up a new suppliers
-//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        logger.debug("Entering populateData()");
         SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         Supplier lenovo = new Supplier("Lenovo", "Computers");
@@ -82,9 +89,9 @@ public class Main {
         supplierDataStore.add(westernelectric);
         supplierDataStore.add(tinkertom);
         supplierDataStore.add(funfactory);
+        logger.debug("Populating suppliers is OK!");
 
         //setting up a new product categories
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory phone = new ProductCategory("Phone", "Hardware", "A phone.");
@@ -92,9 +99,9 @@ public class Main {
         productCategoryDataStore.add(tablet);
         productCategoryDataStore.add(phone);
         productCategoryDataStore.add(gift);
+        logger.debug("Populating product categories is OK!");
 
         //setting up products and printing it
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
@@ -104,18 +111,20 @@ public class Main {
         productDataStore.add(new Product("Wirephone", 5, "USD", "For minimalists.", phone, tinkertom));
         productDataStore.add(new Product("Rubber duck", 5, "USD", "Necessity.", gift, funfactory));
         productDataStore.add(new Product("Towel", 5, "USD", "Never forget your towel.", gift, funfactory));
+        logger.debug("Populating products is OK!");
 
         //setting up the basic payment methods
         PaymentMethodDao paymentDataStore = PaymentMethodDaoJdbc.getInstance();
         paymentDataStore.add("creditcard");
         paymentDataStore.add("paypal");
+        logger.debug("Populating payments is OK!");
 
         //setting up statuses
         StatusDao statusDataStore = StatusDaoJdbc.getInstance();
         statusDataStore.add("checkout");
         statusDataStore.add("payed");
-
-
+        logger.debug("Populating statuses is OK!");
+        logger.debug("Leaving populateData()");
     }
 
 }
