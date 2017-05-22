@@ -24,7 +24,8 @@ public class OrderDaoJdbc implements OrderDao {
         return instance;
     }
 
-    public void add(String name, String email, String phonenumber, String billingaddress, String shippingaddress, String description, Date date, int paymentMethod, int status) {
+    public void add(String name, String email, String phonenumber, String billingaddress, String shippingaddress,
+                    String description, Date date, int paymentMethod, int status) {
         logger.debug("Entering add()");
         String query = "INSERT INTO orders (name, email, phonenumber, billingaddress, shippingaddress, description, date, paymentMethod, status, userid)" +
                        " VALUES ('"+name+"', '"+email+"', '"+phonenumber+"', '"+billingaddress+"', '"+shippingaddress+"', '"+description+"', '"+date+"', "+paymentMethod+", "+status+", 0);";
