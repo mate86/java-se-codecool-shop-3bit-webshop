@@ -52,9 +52,11 @@ public class OrderDaoJdbc implements OrderDao {
 
     private void executeQuery(String query) {
         logger.debug("Entering executeQuery()");
-        try (Connection connection = DatabaseConnection.getConnection();
-             Statement statement = connection.createStatement();
-        ) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            logger.debug("Database connection is OK!");
+            Statement statement = connection.createStatement();
+
             statement.execute(query);
             logger.debug("Query executed");
 
