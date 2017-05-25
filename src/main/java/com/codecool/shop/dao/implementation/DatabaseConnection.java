@@ -8,6 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class authenticates the database connection.
+ *
+ * <p>The <tt>getConnection()</tt> function throws an <tt>SQLException</tt>, if the connection authentication fails.
+ *
+ * @author Mate Balazs
+ */
+
 public class DatabaseConnection {
     private static String DATABASE;
     private static String DB_USER;
