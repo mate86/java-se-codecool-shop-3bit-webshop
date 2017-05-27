@@ -11,17 +11,16 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class handles the cart's content: adds products to cart from database, removes, and modifies quantity.
+ */
 public class CartController {
 
+
     /**
-     * This class handles the cart's content: adds products to cart from database, removes, and modifies quantity.
+     * Loading cart content from database.
      */
-
     public static ModelAndView renderProducts(Request req, Response res) {
-
-        /**
-         * Loading cart content from database
-         */
 
         Map params = new HashMap<>();
         Cart cart = new Cart();
@@ -31,11 +30,10 @@ public class CartController {
         return new ModelAndView(params, "cart/list");
     }
 
+    /**
+     * Adding product into cart.
+     */
     public static String addProduct(Request req, Response res) {
-
-        /**
-         * Adding product into cart
-         */
 
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
@@ -50,11 +48,10 @@ public class CartController {
         return cart.getCartSize().toString();
     }
 
+    /**
+     * Removing product from cart.
+     */
     public static ModelAndView removeProduct(Request req, Response res) {
-
-        /**
-         * Removing product from cart
-         */
 
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
@@ -69,11 +66,10 @@ public class CartController {
         return new ModelAndView(params, "cart/list");
     }
 
+    /**
+     * Modifying product quantity in cart.
+     */
     public static ModelAndView modifyProduct(Request req, Response res) {
-
-        /**
-         * Modifying product quantity in cart
-         */
 
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();

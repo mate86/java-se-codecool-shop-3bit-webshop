@@ -12,7 +12,16 @@ import java.util.Map;
 /**
  * Created by flowerpower on 2017. 05. 04..
  */
+
+/**
+ * This class handles the order: checkout, selecting payment method and confirm order.
+ */
+
 public class OrderController {
+
+    /**
+     * Loading cart content from database.
+     */
     public static ModelAndView checkout(Request req, Response res) {
         Map params = new HashMap<>();
         Cart cart = new Cart();
@@ -22,6 +31,9 @@ public class OrderController {
         return new ModelAndView(params, "order/checkout");
     }
 
+    /**
+     * Setting user's details.
+     */
     public static ModelAndView payment(Request req, Response res) {
 
         //Instantiate needed variables
@@ -46,6 +58,9 @@ public class OrderController {
         return new ModelAndView(params, "order/payment");
     }
 
+    /**
+     * Selecting payment method, confirm order.
+     */
     public static ModelAndView confirmation(Request req, Response res) {
 
         //Instantiate needed variables
@@ -72,5 +87,4 @@ public class OrderController {
         );
         return new ModelAndView(params, "order/confirmation");
     }
-
 }

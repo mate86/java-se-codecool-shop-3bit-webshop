@@ -20,11 +20,10 @@ import java.util.Map;
 
 public class ProductController {
 
+    /**
+     * This method returns all products which fulfill the filter requirements.
+     */
     public static ModelAndView renderProducts(Request req, Response res) {
-
-        /**
-         * This method returns all products which fulfill the filter requirements.
-         */
 
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
