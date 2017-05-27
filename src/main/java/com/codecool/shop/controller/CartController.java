@@ -18,6 +18,11 @@ public class CartController {
      */
 
     public static ModelAndView renderProducts(Request req, Response res) {
+
+        /**
+         * Loading cart content from database
+         */
+
         Map params = new HashMap<>();
         Cart cart = new Cart();
         cart.initFromSession(req);
@@ -27,6 +32,11 @@ public class CartController {
     }
 
     public static String addProduct(Request req, Response res) {
+
+        /**
+         * Adding product into cart
+         */
+
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
@@ -41,6 +51,11 @@ public class CartController {
     }
 
     public static ModelAndView removeProduct(Request req, Response res) {
+
+        /**
+         * Removing product from cart
+         */
+
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
@@ -55,6 +70,11 @@ public class CartController {
     }
 
     public static ModelAndView modifyProduct(Request req, Response res) {
+
+        /**
+         * Modifying product quantity in cart
+         */
+
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         Cart cart = new Cart();
         cart.initFromSession(req);
