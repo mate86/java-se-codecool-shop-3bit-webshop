@@ -13,12 +13,18 @@ import spark.ModelAndView;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class loads the products from product table in the database.
+ * It can filter products by categories and suppliers.
+ */
+
 public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+
+        /**
+         * This method returns all products which fulfill the filter requirements.
+         */
 
         ProductDao productDataStore = ProductDaoJdbc.getInstance();
         SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();

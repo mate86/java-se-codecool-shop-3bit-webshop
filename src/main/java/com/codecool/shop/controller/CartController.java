@@ -11,10 +11,12 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by flowerpower on 2017. 05. 02..
- */
 public class CartController {
+
+    /**
+     * This class handles the cart's content: adds products to cart from database, removes, and modifies quantity.
+     */
+
     public static ModelAndView renderProducts(Request req, Response res) {
         Map params = new HashMap<>();
         Cart cart = new Cart();
